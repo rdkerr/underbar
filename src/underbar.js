@@ -82,7 +82,7 @@
       if (test(item)) {
         result.push(item);
       }
-    })
+    });
     return result;
   };
 
@@ -90,10 +90,30 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    return _.filter(collection, function(item) {
+        return !test(item);
+      });
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var result = [];
+    var visited = [];
+    console.log(iterator);
+    _.each(array, function(item, index) {
+      let value = item;
+      if (iterator) {
+        value = iterator(item);
+      }
+      console.log(value);
+      console.log(result);
+      if (isSorted ? (visited[visited.length - 1] !== value) : _.indexOf(visited, value) === -1) {
+        visited.push(value);
+        result.push(array[index]);
+      }
+    });
+
+    return result;
   };
 
 
