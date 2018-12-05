@@ -296,6 +296,18 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var history = {};
+    var result;
+    return function() {
+      var key = func.toString() + Array.from(arguments) + ":" + arguments.length;
+      if (key in history) {
+        result = history[key];
+      } else {
+        result = func.apply(this, arguments);
+        history[key] = result;
+      }
+      return result;
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
