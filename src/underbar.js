@@ -240,10 +240,6 @@
         obj[key] = value;
       });
     });
-    if (arguments.length < 2) return obj;
-    for (let arg of arguments) {
-      console.log(arg);
-    }
     return obj;
   };
 
