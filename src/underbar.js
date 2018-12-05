@@ -210,11 +210,7 @@
     // TIP: There's a very clever way to re-use every() here.
     iterator = iterator === undefined ? _.identity : iterator;
     return !_.every(collection, function(item) {
-      if (iterator(item)) {
-        return false;
-      } {
-        return true;
-      }
+      return !iterator(item);
     });
   };
 
