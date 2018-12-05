@@ -234,7 +234,6 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-    console.log(arguments);
     _.each(arguments, function(item) {
       _.each(item, function(value, key) {
         obj[key] = value;
@@ -246,6 +245,14 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    _.each(arguments, function(item) {
+      _.each(item, function(value, key) {
+        if (!(key in obj)) {
+          obj[key] = value;
+        }
+      });
+    });
+    return obj;
   };
 
 
