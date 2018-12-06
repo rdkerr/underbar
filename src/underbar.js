@@ -410,7 +410,16 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
-    //console.log(arguments);
+    const longest  = _.reduce(Array.from(arguments), (a,b) => b.length > a ? b.length : a, 0);
+    let result = [];
+    for (let index = 0 ; index < longest ; index ++) {
+      let element = [];
+      for (let argIndex = 0 ; argIndex < arguments.length ; argIndex ++) {
+        element.push(arguments[argIndex][index]);
+      }
+      result.push(element);
+    }
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
