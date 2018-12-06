@@ -425,6 +425,15 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var args = Array.from(arguments);
+    var items = _.uniq(_.flatten(args));
+    var result = [];
+    _.each(items, (item) => {
+      if(_.every(args, (arr) => _.contains(arr,item))) {
+        result.push(item);
+      }
+    });
+    return result;   
   };
 
   // Take the difference between one array and a number of other arrays.
