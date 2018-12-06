@@ -361,7 +361,7 @@
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
     return _.map(collection, function(item) {
-      if (typeof functionOrKey == "function") {
+      if (typeof functionOrKey === "function") {
         return functionOrKey.apply(item, args);
       } else {
         return item[functionOrKey].apply(item, args);
@@ -374,6 +374,13 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    return collection.sort((a,b) => {
+      if (typeof iterator === "function") {
+        return iterator(a) - iterator(b);
+      } else {
+        return a[iterator] - b[iterator];
+      }
+    });
   };
 
   // Zip together two or more arrays with elements of the same index
