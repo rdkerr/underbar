@@ -383,19 +383,34 @@
     });
   };
 
+  // Takes a multidimensional array and converts it to a one-dimensional array.
+  // The new array should contain all elements of the multidimensional array.
+  //
+  // Hint: Use Array.isArray to check if something is an array
+  _.flatten = function(nestedArray, result) {
+    result = [];
+    return flattenHelper(nestedArray, result);
+  };
+  
+  // Helper method to deal with nested arrays
+  var flattenHelper = function(array, result) {
+    _.each(array, (item) => {
+      if (Array.isArray(item)) {
+        flattenHelper(item, result);
+      } else {
+        result.push(item);
+      }
+    });
+    return result;
+  };
+
   // Zip together two or more arrays with elements of the same index
   // going together.
   //
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
-  };
-
-  // Takes a multidimensional array and converts it to a one-dimensional array.
-  // The new array should contain all elements of the multidimensional array.
-  //
-  // Hint: Use Array.isArray to check if something is an array
-  _.flatten = function(nestedArray, result) {
+    //console.log(arguments);
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
