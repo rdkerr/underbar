@@ -455,5 +455,23 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var before = 0;
+    var delayCall;
+    var delay = function() {
+      before = Date.parse(sinon.timers.Date());
+      delayCall = null;
+      return func(arguments);
+    }
+    return function() {
+      var start = Date.parse(sinon.timers.Date());
+      var timeRemaining = wait - (start - before);
+      if (timeRemaining <= 0) {
+        before = start;
+        delayCall = null;
+        return func(arguments);
+      } else if(delayCall === null) {
+        delayCall = setTimeout(delay, timeRemaining);
+      }
+    }
   };
 }());
